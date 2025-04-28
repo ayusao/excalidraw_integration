@@ -1,6 +1,7 @@
 import React from "react";
 import { Excalidraw, MainMenu } from "@excalidraw/excalidraw";
 import { useNavigate } from "react-router-dom"; 
+import { FaSignOutAlt } from "react-icons/fa";  // Import the icon
 
 // function CanvasPage() {
 //   return (
@@ -24,13 +25,16 @@ function CanvasPage() {
       <Excalidraw>
         <MainMenu>
             {/* <MainMenu.DefaultItems.Socials /> */}
+            <MainMenu.DefaultItems.LoadScene />
             <MainMenu.DefaultItems.Export />
-            <MainMenu.DefaultItems.ToggleTheme />
             <MainMenu.DefaultItems.SaveAsImage />
             <MainMenu.DefaultItems.ClearCanvas />
-            <MainMenu.DefaultItems.LoadScene />
+            <MainMenu.DefaultItems.ToggleTheme />
             <MainMenu.Item onSelect={handleLogout}>
-            Logout
+              <div style={{ display: "flex", alignItems: "flex-start" }}>
+                <FaSignOutAlt style={{ marginRight: "8px" }} />
+                <span>Logout</span>
+              </div>
             </MainMenu.Item>
         </MainMenu>
       </Excalidraw>
