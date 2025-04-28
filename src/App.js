@@ -1,5 +1,5 @@
 import './App.css';
-import { Excalidraw } from "@excalidraw/excalidraw";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/loginpage';
 import CanvasPage from './components/canvaspage';
 
@@ -7,10 +7,16 @@ import CanvasPage from './components/canvaspage';
 function App() {
   return (
     <>
-      <div>
+      
         {/* <LoginPage/> */}
-        <CanvasPage/>
-      </div>
+        {/* <CanvasPage/> */}
+        <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/canvas" element={<CanvasPage />} />
+      </Routes>
+    </Router>
+
     </>
   );
 }

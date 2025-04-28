@@ -1,15 +1,18 @@
 // src/components/loginpage.js
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  
   const handleLogin = (e) => {
     e.preventDefault();
     console.log("Username:", username);
     console.log("Password:", password);
+    navigate("/canvas");
   };
 
   return (
