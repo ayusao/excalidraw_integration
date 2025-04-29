@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Excalidraw, MainMenu } from "@excalidraw/excalidraw";
+import { Excalidraw, MainMenu, WelcomeScreen } from "@excalidraw/excalidraw";
 import { useNavigate } from "react-router-dom"; 
 import { FaSignOutAlt } from "react-icons/fa"; 
 import "./canvaspage.css";
 import { useAuth } from "../firebase/authContext";
+import { BiFontSize } from "react-icons/bi";
 
 function CanvasPage() {
   const navigate = useNavigate();
@@ -60,6 +61,22 @@ function CanvasPage() {
             </div>
           </MainMenu.Item>
         </MainMenu>
+
+        <WelcomeScreen>
+          <WelcomeScreen.Hints.MenuHint />
+          <WelcomeScreen.Hints.ToolbarHint>
+            <p>Toolbar Hints!</p>
+          </WelcomeScreen.Hints.ToolbarHint>
+          <WelcomeScreen.Hints.HelpHint />
+
+          <WelcomeScreen.Center>
+            <WelcomeScreen.Center.Heading>
+              <span style={{ fontSize: '2rem', fontWeight: 'bold' }}>Start drawing!</span>
+              <p>Draw your heart out.</p>
+            </WelcomeScreen.Center.Heading>
+          </WelcomeScreen.Center>
+
+        </WelcomeScreen>
       </Excalidraw>
 
       {showLogoutConfirm && (
