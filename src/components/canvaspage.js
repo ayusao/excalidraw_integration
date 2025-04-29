@@ -1,45 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Excalidraw, MainMenu } from "@excalidraw/excalidraw";
 import { useNavigate } from "react-router-dom"; 
-import { FaSignOutAlt } from "react-icons/fa";  // Import the icon
+import { FaSignOutAlt } from "react-icons/fa"; 
+import "./canvaspage.css";
 
-// function CanvasPage() {
-//   return (
-//     <div style={{ height: "100vh" }}>
-//       <Excalidraw>
-//         {/* <MainMenu.DefaultItems.ToggleTheme/> */}
-//       </Excalidraw> 
-//     </div>
-//   );
-// }
 function CanvasPage() {
   const navigate = useNavigate();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogoutClick = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const confirmLogout = () => {
     console.log("Logging out...");
     navigate("/"); // Redirects to login page
   };
-  return (
 
-    <div style={{ height: "100vh" }}>
+  const cancelLogout = () => {
+    setShowLogoutConfirm(false);
+  };
+
+  return (
+    <div style={{ height: "100vh", position: "relative" }}>
       <Excalidraw>
         <MainMenu>
-            {/* <MainMenu.DefaultItems.Socials /> */}
-            <MainMenu.DefaultItems.LoadScene />
-            <MainMenu.DefaultItems.Export />
-            <MainMenu.DefaultItems.SaveAsImage />
-            <MainMenu.DefaultItems.ClearCanvas />
-            <MainMenu.DefaultItems.ToggleTheme />
-            <MainMenu.Item onSelect={handleLogout}>
-              <div style={{ display: "flex", alignItems: "flex-start" }}>
-                <FaSignOutAlt style={{ marginRight: "8px" }} />
-                <span>Logout</span>
-              </div>
-            </MainMenu.Item>
+          <MainMenu.DefaultItems.LoadScene />
+          <MainMenu.DefaultItems.Export />
+          <MainMenu.DefaultItems.SaveAsImage />
+          <MainMenu.DefaultItems.ClearCanvas />
+          <MainMenu.DefaultItems.ToggleTheme />
+          <MainMenu.Item onSelect={handleLogoutClick}>
+            <div style={{ display: "flex", alignItems: "flex-start" }}>
+              <FaSignOutAlt style={{ marginRight: "8px" }} />
+              <span>Logout</span>
+            </div>
+          </MainMenu.Item>
         </MainMenu>
       </Excalidraw>
-    </div>
 
+      {showLogoutConfirm && (
+        <div className="logout-modal-background">
+          <div className="logout-modal">
+            <h2>DrawMate</h2>
+            <p>Are you sure you want to logout?</p>
+            <div className="logout-buttons">
+              <button onClick={confirmLogout} className="logout-button">
+                Yes, Logout
+              </button>
+              <button onClick={cancelLogout} className="cancel-button">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
+
 export default CanvasPage;
