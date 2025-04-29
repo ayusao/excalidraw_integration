@@ -1,53 +1,101 @@
-// src/components/loginpage.js
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../firebase/auth";
+import { useAuth } from "../firebase/authContext";
+import { FaGoogle } from "react-icons/fa"; 
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   
-  const handleLogin = (e) => {
+  const navigate = useNavigate();
+  const { user } = useAuth(); // access user info
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
-    navigate("/canvas");
+    setIsSigningIn(true);
+    setErrorMessage("");
+
+    try {
+      await doSignInWithEmailAndPassword(email, password);
+      navigate("/canvas"); // redirect after successful login
+    } catch (error) {
+      console.error("Login error:", error);
+      setErrorMessage(error.message);
+    }
+    setIsSigningIn(false);
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await doSignInWithGoogle();
+      navigate("/canvas");
+    } catch (error) {
+      console.error("Google Sign-In error:", error);
+      setErrorMessage(error.message);
+    }
   };
 
   return (
     <>
-    <div className="login-heading">
-      DrawMate
-    </div>
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div className="input-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
-            required
-          />
+      <div className="login-heading">DrawMate</div>
+      <div className="login-container">
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          <button type="submit" disabled={isSigningIn}>
+            {isSigningIn ? "Signing In..." : "Login"}
+          </button>
+        </form>
+
+        <div style={{ marginTop: "20px" }}>
+          <button 
+            onClick={handleGoogleSignIn} 
+            disabled={isSigningIn} 
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px 15px",
+              backgroundColor: "#4285F4", // Google blue color
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              width: "100%",
+              fontSize: "16px",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
+          >
+            <FaGoogle style={{ marginRight: "10px" }} /> 
+            {isSigningIn ? "Signing In..." : "Login with Google"}
+          </button>
         </div>
-        <div className="input-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+      </div>
     </>
   );
 }
