@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../firebase/auth";
 import { useAuth } from "../firebase/authContext";
 import { FaGoogle } from "react-icons/fa"; 
+import './components.css';
 
 function LoginPage() {
   const [email, setEmail] = useState(""); 
@@ -82,32 +83,18 @@ function LoginPage() {
           <button 
             onClick={handleGoogleSignIn} 
             disabled={isSigningIn} 
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px 15px",
-              backgroundColor: "#4285F4", // Google blue color
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              width: "100%",
-              fontSize: "16px",
-              cursor: "pointer",
-              transition: "background-color 0.3s",
-            }}
+            className="google-login-btn"
           >
             <FaGoogle style={{ marginRight: "10px" }} /> 
             {isSigningIn ? "Signing In..." : "Login with Google"}
           </button>
         </div>
-        <p style={{ marginTop: "15px" ,textAlign: "center" }}>
+        <p className="signup-link">
           Don't have an account?{" "}
-          <span 
-            style={{ color: "#007bff", cursor: "pointer" }} 
+          <span  
             onClick={() => navigate("/signup")}
           >
-            Sign up
+            <u>Sign up</u>
           </span>
         </p>
       </div>

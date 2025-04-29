@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Excalidraw, MainMenu, WelcomeScreen } from "@excalidraw/excalidraw";
 import { useNavigate } from "react-router-dom"; 
 import { FaSignOutAlt } from "react-icons/fa"; 
-import "./canvaspage.css";
+import "./components.css";
 import { useAuth } from "../firebase/authContext";
-import { BiFontSize } from "react-icons/bi";
 
 function CanvasPage() {
   const navigate = useNavigate();
