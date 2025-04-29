@@ -1,5 +1,5 @@
 ## DrawMate
-**DrawMate** is a web-based drawing tool built with **React** that integrates the **Excalidraw** drawing library. It allows users to create sketches, diagrams, and visual notes. Authentication is managed using Firebase, supporting both Email/Password and Google Sign-In.
+**DrawMate** is a web-based drawing tool built with **React** that integrates the **Excalidraw** drawing library. It allows users to create sketches, diagrams, and visual notes. 
 
 ## Getting Started
 
