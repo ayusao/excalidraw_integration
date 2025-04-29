@@ -2,22 +2,29 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/loginpage';
 import CanvasPage from './components/canvaspage';
-
+import PrivateRoute from './components/privateroute';
+import { AuthProvider } from './firebase/authContext';
 
 function App() {
   return (
-    <>
-      
-        {/* <LoginPage/> */}
-        {/* <CanvasPage/> */}
-        <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/canvas" element={<CanvasPage />} />
-      </Routes>
-    </Router>
-
-    </>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          
+          {/* PROTECTED CANVAS PAGE */}
+          <Route
+            path="/canvas"
+            element={
+              <PrivateRoute>
+                <CanvasPage />
+              </PrivateRoute>
+            }
+          />
+          
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
