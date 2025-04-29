@@ -85,7 +85,7 @@ function CanvasPage() {
             <p>Are you sure you want to logout?</p>
             <div className="logout-buttons">
               <button onClick={confirmLogout} className="logout-button">
-                Yes, Logout
+                Logout
               </button>
               <button onClick={cancelLogout} className="cancel-button">
                 Cancel

@@ -64,9 +64,6 @@
     animation: fadeIn 0.3s ease-out;
   }
 
-
-
-
 /*login page*/
 .login-container {
   width: 400px; 
@@ -74,16 +71,9 @@
   border: 3px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  background-color: #f9f9f9;
-
-  /* REMOVE these lines: */
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  margin: 40px auto; /* Center horizontally and provide top space */
+  background-color: #e4eaf1;
+  margin: 40px auto;
 }
-
 .login-heading {
   text-align: center;
   margin-top: 40px;
@@ -123,7 +113,7 @@ button {
   width: 100%;  
   padding: 10px; 
   font-size: 18px;
-  background-color: #4caf50;
+  background-color: #4285F4;
   color: white;
   border: none;
   border-radius: 6px;
@@ -132,14 +122,14 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #2773ee;
 }
 .google-login-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-color: #4caf50;
+    background-color: #4285F4;
     color: white;
     border: none;
     border-radius: 4px;
@@ -150,7 +140,7 @@ button:hover {
   }
   
   .google-login-btn:hover {
-    background-color: #45a049;
+    background-color: #2773ee;
   }
   
   .signup-link {
