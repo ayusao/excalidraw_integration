@@ -1,0 +1,20 @@
+/* src/styles/Navbar.css */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 16px; /* reduced top/bottom padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info h3 {
+  font-size: 14px; /* slightly smaller text */
+  font-weight: normal;
+  margin: 0 15px;
+}
+
+.navbar h1 {
+  font-size: 18px; /* smaller title */
+  margin: 0 15px;
+}
