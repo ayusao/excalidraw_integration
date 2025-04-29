@@ -45,7 +45,7 @@ function CanvasPage() {
 
 
   return (
-    <div style={{ height: "100vh", position: "relative" }}>
+    <div style={{ height: "90vh", position: "relative" }}>
       <Excalidraw>
         <MainMenu>
           <MainMenu.DefaultItems.LoadScene />

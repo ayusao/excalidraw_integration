@@ -5,11 +5,13 @@ import CanvasPage from './components/canvaspage';
 import SignUpPage from './components/signuppage'
 import PrivateRoute from './components/privateroute';
 import { AuthProvider } from './firebase/authContext';
+import Navbar from './components/navbar';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
+        <Navbar/>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
