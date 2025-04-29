@@ -101,6 +101,15 @@ function LoginPage() {
             {isSigningIn ? "Signing In..." : "Login with Google"}
           </button>
         </div>
+        <p style={{ marginTop: "15px" ,textAlign: "center" }}>
+          Don't have an account?{" "}
+          <span 
+            style={{ color: "#007bff", cursor: "pointer" }} 
+            onClick={() => navigate("/signup")}
+          >
+            Sign up
+          </span>
+        </p>
       </div>
     </>
   );
