@@ -1,10 +1,7 @@
-// src/components/signuppage.js
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
-import { saveUserProfile } from "../firebase/userHelpers";
-import { updateProfile } from "firebase/auth";
 
 function SignUpPage() {
   const [userName, setUserName] = useState("");
