@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Excalidraw, MainMenu } from "@excalidraw/excalidraw";
 import { useNavigate } from "react-router-dom"; 
 import { FaSignOutAlt } from "react-icons/fa"; 
@@ -8,6 +8,23 @@ function CanvasPage() {
   const navigate = useNavigate();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        cancelLogout();  // Close modal if Escape is pressed
+      }
+    };
+
+    // Add event listener when modal is shown
+    if (showLogoutConfirm) {
+      document.addEventListener("keydown", handleEscape);
+    }
+
+    // Cleanup the event listener
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [showLogoutConfirm]);
   const handleLogoutClick = () => {
     setShowLogoutConfirm(true);
   };
