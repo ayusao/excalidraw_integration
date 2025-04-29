@@ -120,7 +120,9 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
-
+.button-wrapper {
+  margin-top: 15px;
+}
 button:hover {
   background-color: #2773ee;
 }
