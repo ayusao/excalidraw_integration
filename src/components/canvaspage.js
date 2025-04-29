@@ -3,9 +3,11 @@ import { Excalidraw, MainMenu } from "@excalidraw/excalidraw";
 import { useNavigate } from "react-router-dom"; 
 import { FaSignOutAlt } from "react-icons/fa"; 
 import "./canvaspage.css";
+import { useAuth } from "../firebase/authContext";
 
 function CanvasPage() {
   const navigate = useNavigate();
+  const { logout } = useAuth();  // use logout from context
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   useEffect(() => {
@@ -15,28 +17,32 @@ function CanvasPage() {
       }
     };
 
-    // Add event listener when modal is shown
     if (showLogoutConfirm) {
       document.addEventListener("keydown", handleEscape);
     }
-
-    // Cleanup the event listener
     return () => {
       document.removeEventListener("keydown", handleEscape);
     };
   }, [showLogoutConfirm]);
+
   const handleLogoutClick = () => {
     setShowLogoutConfirm(true);
   };
 
-  const confirmLogout = () => {
-    console.log("Logging out...");
-    navigate("/"); // Redirects to login page
+  const confirmLogout = async () => {
+    try {
+      await logout();    // THIS is important - actually sign out from Firebase
+      console.log("Logged out");
+      navigate("/");      // Then redirect to login page
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   const cancelLogout = () => {
     setShowLogoutConfirm(false);
   };
+
 
   return (
     <div style={{ height: "100vh", position: "relative" }}>

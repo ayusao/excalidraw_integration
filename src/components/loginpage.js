@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../firebase/auth";
 import { useAuth } from "../firebase/authContext";
@@ -12,7 +12,13 @@ function LoginPage() {
   
   const navigate = useNavigate();
   const { user } = useAuth(); // access user info
-
+  
+  // redirects logged-in users to the page
+  useEffect(() => {
+    if (user) {
+      navigate("/canvas");
+    }
+  }, [user, navigate]);
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsSigningIn(true);
