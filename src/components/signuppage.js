@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
+import { saveUserProfile } from "../firebase/userHelpers";
+import { updateProfile } from "firebase/auth";
 
 function SignUpPage() {
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -25,8 +28,11 @@ function SignUpPage() {
     }
 
     try {
-      await doCreateUserWithEmailAndPassword(email, password);
-      navigate("/canvas"); // After successful signup, go to canvas
+      const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      console.log("User created:", user);
+      
+    navigate("/canvas");
     } catch (error) {
       console.error("Signup error:", error);
       setErrorMessage(error.message);
@@ -41,6 +47,17 @@ function SignUpPage() {
       <div className="login-container">
         <h2>Sign Up</h2>
         <form onSubmit={handleSignUp}>
+        <div className="input-group">
+            <label htmlFor="userName">Full Name</label>
+            <input
+              type="text"
+              id="userName"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              placeholder="Enter your username"
+              required
+            />
+          </div>
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
